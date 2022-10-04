@@ -1,5 +1,5 @@
 {
-  "name": "module-13-challenge-orm",
+  "name": "e-commerce-backend",
   "version": "1.0.0",
   "description": "A backend server application for an e-commerce website",
   "main": "server.js",
@@ -11,18 +11,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@work.github.com:coding-boot-camp/module-13-challenge-orm.git"
+    "url": "git@github.com:Shengaero/e-commerce-backend.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "e-commerce",
+    "backend"
+  ],
+  "author": "Kaidan Gustave",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.3"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mysql2": "^2.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.24.0"
   }
 }
