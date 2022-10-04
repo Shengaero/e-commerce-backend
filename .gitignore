@@ -1,0 +1,9 @@
+# Dev #
+.env
+dev
+
+# Node #
+node_modules
+
+# Misc #
+.DS_Store
