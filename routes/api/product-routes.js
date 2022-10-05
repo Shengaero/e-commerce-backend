@@ -1,24 +1,7 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
-const { mapProduct, mapCategory, mapTag } = require('./utils');
 
 // The `/api/products` endpoint
-
-const wrappedMapProduct = (product) => {
-  return mapProduct(product, {
-    category: mapCategory(product.category),
-    tags: product.tags.map(tag => {
-      const { product_tag } = tag;
-      return mapTag(tag, {
-        product_tag: {
-          id: product_tag.id,
-          product_id: product_tag.product_id,
-          tag_id: product_tag.tag_id
-        }
-      });
-    })
-  });
-};
 
 // get all products
 router.get('/', async (_, res) => {
@@ -27,7 +10,7 @@ router.get('/', async (_, res) => {
   });
 
   res.status(200);                            // respond with 200 - OK
-  res.json(products.map(wrappedMapProduct));  // respond with found products as JSON
+  res.json(products);                         // respond with found products as JSON
 });
 
 // get one product
@@ -43,7 +26,7 @@ router.get('/:id', async (req, res) => {
   }
 
   res.status(200);                              // respond with 200 - OK
-  res.json(wrappedMapProduct(product));         // respond with found product as JSON
+  res.json(product);                            // respond with found product as JSON
 });
 
 // create new product
@@ -171,8 +154,8 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   const { id } = req.params;
-+
-0
+  +
+    0;
   res.sendStatus(501);
 });
 
