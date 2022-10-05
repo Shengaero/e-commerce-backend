@@ -1,9 +1,18 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
+const { mapCategory, mapProduct } = require('./utils');
 
 // The `/api/categories` endpoint
 
 const missingCategoryNameError = () => ({ error: 'request body missing non-null "category_name" property' });
+
+const wrappedMapCategory = (category) => {
+  return mapCategory(category, {
+    products: category.products.map(product => {
+      return mapProduct(product);
+    })
+  });
+};
 
 router.get('/', async (_, res) => {
   const categories = await Category.findAll({   // find all categories
@@ -11,7 +20,7 @@ router.get('/', async (_, res) => {
   });
 
   res.status(200);                              // respond with 200 - OK
-  res.json(categories);                         // respond with found categories as JSON
+  res.json(categories.map(wrappedMapCategory)); // respond with found categories as JSON
 });
 
 router.get('/:id', async (req, res) => {
@@ -26,7 +35,7 @@ router.get('/:id', async (req, res) => {
   }
 
   res.status(200);                                // respond with 200 - OK
-  res.json(category);                             // respond with found category as JSON
+  res.json(wrappedMapCategory(category));         // respond with found category as JSON
 });
 
 router.post('/', async (req, res) => {
